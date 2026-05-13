@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BC Studios – Headshots & Retratos Profesionales en Lima</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #B8975A;
+    --gold-light: #D4B87A;
+    --black: #0A0A0A;
+    --off-black: #111111;
+    --dark: #1A1A1A;
+    --mid: #2E2E2E;
+    --text-muted: #888;
+    --text-light: #C8C8C8;
+    --white: #F8F6F2;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--sans);
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.5rem 5vw;
+    display: flex; align-items: center; justify-content: space-between;
+    background: linear-gradient(to bottom, rgba(10,10,10,.95), transparent);
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: .08em;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: .85rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold);
+    color: var(--black) !important;
+    padding: .5rem 1.4rem;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+  .nav-cta:hover { background: var(--gold-light) !important; color: var(--black) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left {
+    display: flex; flex-direction: column;
+    justify-content: center;
+    padding: 8rem 5vw 6rem 8vw;
+    position: relative; z-index: 2;
+  }
+  .hero-eyebrow {
+    font-size: .75rem;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: .75rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block; width: 2rem; height: 1px;
+    background: var(--gold);
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+    color: var(--white);
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-sub {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 36ch;
+    margin-bottom: 2.5rem;
+  }
+  .hero-actions { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--black);
+    padding: .9rem 2.2rem;
+    border: none; border-radius: 2px;
+    font-family: var(--sans);
+    font-size: .9rem;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background .2s, transform .15s;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-ghost {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: .85rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--mid);
+    padding-bottom: 2px;
+    transition: color .2s, border-color .2s;
+  }
+  .btn-ghost:hover { color: var(--gold); border-color: var(--gold); }
+
+  .hero-stats {
+    margin-top: 4rem;
+    display: flex; gap: 2.5rem;
+  }
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: .75rem;
+    color: var(--text-muted);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-top: .25rem;
+  }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-img-wrap {
+    position: absolute; inset: 0;
+    background: var(--dark);
+  }
+  .hero-img-wrap::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, var(--black) 0%, transparent 40%),
+                linear-gradient(to top, var(--black) 0%, transparent 40%);
+  }
+  .hero-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: .7;
+    filter: grayscale(20%);
+  }
+  .hero-badge {
+    position: absolute;
+    bottom: 2.5rem; left: 2rem; z-index: 5;
+    background: rgba(10,10,10,.85);
+    border: 1px solid var(--gold);
+    padding: .8rem 1.2rem;
+    backdrop-filter: blur(8px);
+    border-radius: 2px;
+  }
+  .badge-text {
+    font-size: .7rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* ── TRUST BAR ── */
+  .trust-bar {
+    border-top: 1px solid var(--mid);
+    border-bottom: 1px solid var(--mid);
+    padding: 1.5rem 5vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 2rem;
+    flex-wrap: wrap;
+    background: var(--off-black);
+  }
+  .trust-item {
+    display: flex; align-items: center; gap: .75rem;
+    color: var(--text-muted);
+    font-size: .8rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .trust-icon {
+    width: 1.5rem; height: 1.5rem;
+    fill: none; stroke: var(--gold); stroke-width: 1.5;
+    stroke-linecap: round; stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 6rem 8vw; }
+  .section-label {
+    font-size: .72rem;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: .75rem;
+  }
+  .section-label::before {
+    content: ''; display: block;
+    width: 1.5rem; height: 1px; background: var(--gold);
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  /* ── FEATURED SERVICE ── */
+  .featured {
+    background: var(--off-black);
+    padding: 6rem 8vw;
+  }
+  .featured-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .featured-img-stack {
+    position: relative;
+    height: 580px;
+  }
+  .img-card {
+    position: absolute;
+    border-radius: 2px;
+    overflow: hidden;
+    background: var(--mid);
+  }
+  .img-card img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(15%); }
+  .img-card-main { width: 78%; height: 440px; top: 0; left: 0; }
+  .img-card-accent { width: 52%; height: 260px; bottom: 0; right: 0; border: 3px solid var(--black); }
+  .img-float-label {
+    position: absolute;
+    top: 1.5rem; right: -1rem;
+    background: var(--gold);
+    color: var(--black);
+    padding: .5rem 1rem;
+    font-size: .72rem;
+    font-weight: 500;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    border-radius: 1px;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    rotate: 180deg;
+  }
+  .featured-content .section-title { margin-bottom: 1.5rem; }
+  .featured-desc {
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    font-size: .95rem;
+  }
+  .feature-list { list-style: none; margin-bottom: 2.5rem; }
+  .feature-list li {
+    display: flex; align-items: flex-start; gap: .75rem;
+    padding: .75rem 0;
+    border-bottom: 1px solid var(--mid);
+    font-size: .9rem;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+  .feature-list li::before {
+    content: '✦';
+    color: var(--gold);
+    font-size: .6rem;
+    flex-shrink: 0;
+    margin-top: .35rem;
+  }
+
+  /* ── PACKAGES ── */
+  .packages-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+  .pkg-card {
+    background: var(--off-black);
+    border: 1px solid var(--mid);
+    padding: 2rem;
+    border-radius: 2px;
+    position: relative;
+    transition: border-color .25s, transform .25s;
+  }
+  .pkg-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+  .pkg-card.featured-pkg {
+    border-color: var(--gold);
+    background: var(--dark);
+  }
+  .pkg-tag {
+    position: absolute; top: -1px; right: 1.5rem;
+    background: var(--gold);
+    color: var(--black);
+    font-size: .65rem;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: .3rem .8rem;
+    border-radius: 0 0 2px 2px;
+  }
+  .pkg-name {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--white);
+    margin-bottom: .25rem;
+  }
+  .pkg-sub {
+    font-size: .75rem;
+    color: var(--text-muted);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .pkg-price {
+    font-family: var(--serif);
+    font-size: 2.8rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: .25rem;
+  }
+  .pkg-price span { font-size: 1.1rem; vertical-align: super; font-weight: 400; }
+  .pkg-currency {
+    font-size: .75rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    letter-spacing: .05em;
+  }
+  .pkg-divider { height: 1px; background: var(--mid); margin: 1.5rem 0; }
+  .pkg-features { list-style: none; }
+  .pkg-features li {
+    font-size: .85rem;
+    color: var(--text-muted);
+    padding: .45rem 0;
+    display: flex; gap: .6rem; align-items: flex-start;
+    line-height: 1.4;
+  }
+  .pkg-features li::before {
+    content: '—'; color: var(--gold);
+    font-size: .8rem; flex-shrink: 0;
+  }
+  .pkg-cta {
+    display: block;
+    margin-top: 2rem;
+    text-align: center;
+    padding: .8rem;
+    border: 1px solid currentColor;
+    border-radius: 2px;
+    text-decoration: none;
+    font-size: .8rem;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    transition: background .2s, color .2s;
+  }
+  .pkg-card:not(.featured-pkg) .pkg-cta { color: var(--text-muted); }
+  .pkg-card:not(.featured-pkg) .pkg-cta:hover { background: var(--gold); color: var(--black); border-color: var(--gold); }
+  .pkg-card.featured-pkg .pkg-cta { color: var(--gold); }
+  .pkg-card.featured-pkg .pkg-cta:hover { background: var(--gold); color: var(--black); border-color: var(--gold); }
+
+  /* ── WHO IT'S FOR ── */
+  .audience {
+    background: var(--off-black);
+    padding: 6rem 8vw;
+  }
+  .audience-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: end;
+    margin-bottom: 4rem;
+  }
+  .audience-desc {
+    color: var(--text-muted);
+    line-height: 1.8;
+    font-size: .95rem;
+    align-self: end;
+  }
+  .audience-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--mid);
+    border: 1px solid var(--mid);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .aud-card {
+    background: var(--off-black);
+    padding: 2rem 1.5rem;
+    transition: background .25s;
+  }
+  .aud-card:hover { background: var(--dark); }
+  .aud-icon {
+    width: 2.5rem; height: 2.5rem;
+    margin-bottom: 1rem;
+    fill: none; stroke: var(--gold); stroke-width: 1.5;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+  .aud-title {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: .5rem;
+    line-height: 1.2;
+  }
+  .aud-desc {
+    font-size: .8rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ── PROCESS ── */
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 3.5rem;
+    position: relative;
+  }
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 1.25rem;
+    left: 12.5%;
+    right: 12.5%;
+    height: 1px;
+    background: var(--mid);
+    z-index: 0;
+  }
+  .step {
+    padding: 0 1.5rem;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .step-num {
+    width: 2.5rem; height: 2.5rem;
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+    background: var(--black);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--gold);
+    margin: 0 auto 1.25rem;
+  }
+  .step-title {
+    font-size: .9rem;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: .5rem;
+    letter-spacing: .05em;
+  }
+  .step-desc {
+    font-size: .78rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials { background: var(--off-black); padding: 6rem 8vw; }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+  .testi-card {
+    background: var(--black);
+    border: 1px solid var(--mid);
+    padding: 2rem;
+    border-radius: 2px;
+    transition: border-color .25s;
+  }
+  .testi-card:hover { border-color: var(--gold); }
+  .stars {
+    color: var(--gold);
+    font-size: 1rem;
+    letter-spacing: .15em;
+    margin-bottom: 1rem;
+  }
+  .testi-text {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-light);
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
+  }
+  .testi-author {
+    font-size: .78rem;
+    font-weight: 500;
+    color: var(--white);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .testi-role { font-size: .72rem; color: var(--text-muted); margin-top: .15rem; }
+
+  /* ── CTA BAND ── */
+  .cta-band {
+    text-align: center;
+    padding: 7rem 8vw;
+    background: var(--black);
+    border-top: 1px solid var(--mid);
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-band::before {
+    content: 'BC';
+    position: absolute;
+    font-family: var(--serif);
+    font-size: 30vw;
+    font-weight: 600;
+    color: rgba(184,151,90,.04);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .cta-band .section-label { justify-content: center; }
+  .cta-band .section-label::before { display: none; }
+  .cta-band .section-title { margin-bottom: 1rem; }
+  .cta-band .section-title::after { content: ''; display: block; width: 3rem; height: 2px; background: var(--gold); margin: 1rem auto 0; }
+  .cta-sub {
+    color: var(--text-muted);
+    font-size: .95rem;
+    margin-bottom: 2.5rem;
+    max-width: 45ch; margin-left: auto; margin-right: auto;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+  .cta-actions { display: flex; align-items: center; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+  .btn-outline {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: .85rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    border: 1px solid var(--mid);
+    padding: .85rem 2rem;
+    border-radius: 2px;
+    transition: border-color .2s, color .2s;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--off-black);
+    border-top: 1px solid var(--mid);
+    padding: 3rem 8vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  .footer-brand {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--white);
+  }
+  .footer-brand span { color: var(--gold); }
+  .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .footer-links a {
+    font-size: .75rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    transition: color .2s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-copy { font-size: .72rem; color: var(--text-muted); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-right { height: 50vw; min-height: 320px; }
+    .hero-left { padding: 8rem 6vw 4rem; }
+    .featured-inner { grid-template-columns: 1fr; }
+    .featured-img-stack { height: 300px; display: none; }
+    .packages-grid { grid-template-columns: 1fr; }
+    .audience-cards { grid-template-columns: repeat(2, 1fr); }
+    .audience-header { grid-template-columns: 1fr; gap: 2rem; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .process-steps::before { display: none; }
+    nav { padding: 1.2rem 5vw; }
+    .nav-links { display: none; }
+    section { padding: 4rem 6vw; }
+  }
+
+  @media (max-width: 540px) {
+    .audience-cards { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; }
+  }
+
+  /* ── ANIMATION ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">BC <span>Studios</span></a>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#paquetes">Paquetes</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="https://bcstudiosperu.myportfolio.com/" target="_blank">Portafolio</a></li>
+    <li><a href="https://forms.gle/g7XPAMXS1UWtR9788" target="_blank" class="nav-cta">Reservar</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Lima, Perú · Estudio Profesional</p>
+    <h1>Tu imagen<br>habla antes<br>que <em>tú</em></h1>
+    <p class="hero-sub">Retratos corporativos y headshots de alto impacto para LinkedIn, empresas, ejecutivos y marcas personales que quieren destacar.</p>
+    <div class="hero-actions">
+      <a href="https://forms.gle/g7XPAMXS1UWtR9788" target="_blank" class="btn-primary">Reservar sesión</a>
+      <a href="https://bcstudiosperu.myportfolio.com/" target="_blank" class="btn-ghost">Ver portafolio →</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Clientes</div>
+      </div>
+      <div>
+        <div class="stat-num">5★</div>
+        <div class="stat-label">Valoración</div>
+      </div>
+      <div>
+        <div class="stat-num">24h</div>
+        <div class="stat-label">Entrega Express</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-wrap">
+      <img
+        class="hero-img"
+        src="https://bcstudiosperu.wordpress.com/wp-content/uploads/2025/11/8x8a3186-editar.jpg"
+        alt="Headshot profesional BC Studios"
+        onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=900&q=80&fit=crop'; this.onerror=null;"
+      >
+    </div>
+    <div class="hero-badge">
+      <div class="badge-text">✦ Headshots · LinkedIn · Corporativos</div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">
+    <svg class="trust-icon" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+    Asesoría de imagen incluida
+  </div>
+  <div class="trust-item">
+    <svg class="trust-icon" viewBox="0 0 24 24"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+    Fotos en alta resolución
+  </div>
+  <div class="trust-item">
+    <svg class="trust-icon" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    Entrega en 24–72 horas
+  </div>
+  <div class="trust-item">
+    <svg class="trust-icon" viewBox="0 0 24 24"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+    Sesiones corporativas desde 5 personas
+  </div>
+</div>
+
+<!-- FEATURED SERVICE -->
+<div class="featured" id="servicios">
+  <div class="featured-inner">
+    <div class="featured-img-stack fade-up">
+      <div class="img-card img-card-main">
+        <img
+          src="https://bcstudiosperu.wordpress.com/wp-content/uploads/2025/11/sesion-de-estudio-211-editar-2.jpg"
+          alt="Sesión headshot profesional"
+          onerror="this.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=80&fit=crop'; this.onerror=null;"
+        >
+      </div>
+      <div class="img-card img-card-accent">
+        <img
+          src="https://bcstudiosperu.wordpress.com/wp-content/uploads/2024/05/x8a4595-editar-2.jpg"
+          alt="Retrato corporativo"
+          onerror="this.src='https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&q=80&fit=crop'; this.onerror=null;"
+        >
+      </div>
+      <div class="img-float-label">Headshots Profesionales</div>
+    </div>
+    <div class="featured-content fade-up">
+      <p class="section-label">Nuestro servicio estrella</p>
+      <h2 class="section-title">Headshots que<br><em>abren puertas</em></h2>
+      <p class="featured-desc">
+        En un mundo donde tu perfil de LinkedIn es tu primera impresión, una foto profesional puede ser la diferencia entre ser ignorado o ser contactado. En BC Studios creamos retratos con luz cuidada, dirección de poses y retoque experto que proyectan autoridad, confianza y profesionalismo.
+      </p>
+      <ul class="feature-list">
+        <li>Optimizadas para LinkedIn, webs corporativas e impresión</li>
+        <li>Asesoría previa de imagen y guía de vestuario incluida</li>
+        <li>Retoque profesional y entrega en alta resolución</li>
+        <li>Sesiones individuales y corporativas (equipos de 5 a 50+)</li>
+        <li>Entrega express en 24 horas disponible</li>
+      </ul>
+      <a href="https://forms.gle/g7XPAMXS1UWtR9788" target="_blank" class="btn-primary">Reservar mi sesión</a>
+    </div>
+  </div>
+</div>
+
+<!-- PACKAGES -->
+<section id="paquetes">
+  <p class="section-label">Elige tu plan</p>
+  <h2 class="section-title">Paquetes<br><em>Headshot</em></h2>
+  <div class="packages-grid">
+
+    <div class="pkg-card fade-up">
+      <p class="pkg-name">Express</p>
+      <p class="pkg-sub">Para perfiles y redes</p>
+      <div class="pkg-price"><span>S/</span>120</div>
+      <p class="pkg-currency">soles · 20 minutos en estudio</p>
+      <div class="pkg-divider"></div>
+      <ul class="pkg-features">
+        <li>4 fotos digitales editadas</li>
+        <li>Entrega en 24 horas</li>
+        <li>Asesoría de imagen incluida</li>
+        <li>Optimizadas para LinkedIn y web</li>
+        <li>Alta resolución + web optimizada</li>
+      </ul>
+      <a href="https://forms.gle/g7XPAMXS1UWtR9788" target="_blank" class="pkg-cta">Reservar Express</a>
+    </div>
+
+    <div class="pkg-card featured-pkg fade-up">
+      <div class="pkg-tag">Más popular</div>
+      <p class="pkg-name">Pro</p>
+      <p class="pkg-sub">Para ejecutivos y marcas</p>
+      <div class="pkg-price"><span>S/</span>220</div>
+      <p class="pkg-currency">soles · 40 minutos en estudio</p>
+      <div class="pkg-divider"></div>
+      <ul class="pkg-features">
+        <li>8 fotos editadas profesionalmente</li>
+        <li>Entrega en 72 horas</li>
+        <li>1 cambio de outfit</li>
+        <li>Asesoría de imagen completa</li>
+        <li>Retoque facial avanzado</li>
+        <li>Alta resolución + web optimizada</li>
+      </ul>
+      <a href="https://forms.gle/g7XPAMXS1UWtR9788" target="_blank" class="pkg-cta">Reservar Pro</a>
+    </div>
+
+    <div class="pkg-card fade-up">
+      <p class="pkg-name">Corporativo</p>
+      <p class="pkg-sub">Para empresas y equipos</p>
+      <div class="pkg-price"><span>S/</span>99</div>
+      <p class="pkg-currency">por persona · desde 5 personas</p>
+      <div class="pkg-divider"></div>
+      <ul class="pkg-features">
+        <li>10 min de sesión + 3 fotos por persona</li>
+        <li>Estilo unificado de marca</li>
+        <li>Asesoría de imagen o mood de equipo</li>
+        <li>Alta resolución para redes e impresión</li>
+        <li>Desde S/85 con 10+ personas</li>
+      </ul>
+      <a href="https://forms.gle/g7XPAMXS1UWtR9788" target="_blank" class="pkg-cta">Cotizar equipo</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- AUDIENCE -->
+<div class="audience">
+  <div class="audience-header fade-up">
+    <div>
+      <p class="section-label">¿Para quién es?</p>
+      <h2 class="section-title">Hecho para<br><em>profesionales</em><br>que destacan</h2>
+    </div>
+    <p class="audience-desc">Ya sea que estés buscando trabajo, construyendo tu marca personal o representando a tu empresa, una imagen profesional es tu mejor inversión. Trabajamos con ejecutivos, emprendedores, consultores y equipos corporativos en Lima.</p>
+  </div>
+  <div class="audience-cards fade-up">
+    <div class="aud-card">
+      <svg class="aud-icon" viewBox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+      <div class="aud-title">Profesionales independientes</div>
+      <p class="aud-desc">Consultores, abogados, médicos, coaches y freelancers que quieren proyectar autoridad.</p>
+    </div>
+    <div class="aud-card">
+      <svg class="aud-icon" viewBox="0 0 24 24"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+      <div class="aud-title">Ejecutivos & Empresas</div>
+      <p class="aud-desc">Directorios, equipos de ventas y líderes que necesitan imagen corporativa unificada.</p>
+    </div>
+    <div class="aud-card">
+      <svg class="aud-icon" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+      <div class="aud-title">Marcas Personales</div>
+      <p class="aud-desc">Emprendedores e influencers que construyen su presencia digital con imagen cuidada.</p>
+    </div>
+    <div class="aud-card">
+      <svg class="aud-icon" viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+      <div class="aud-title">LinkedIn & Portfolios</div>
+      <p class="aud-desc">Profesionales en búsqueda activa que quieren triplicar sus conexiones e impacto online.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PROCESS -->
+<section id="proceso">
+  <p class="section-label">Cómo funciona</p>
+  <h2 class="section-title">Tu sesión, <em>paso a paso</em></h2>
+  <div class="process-steps fade-up">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-title">Reserva online</div>
+      <p class="step-desc">Elige tu paquete, elige fecha y hora disponible. Confirmamos con el 30% de anticipo.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-title">Asesoría previa</div>
+      <p class="step-desc">Te enviamos una guía de vestuario y coordinamos el estilo y mood antes de tu sesión.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-title">Sesión en estudio</div>
+      <p class="step-desc">Te dirigimos en poses y expresiones para capturar tus mejores ángulos con luz profesional.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-title">Entrega digital</div>
+      <p class="step-desc">Recibes tus fotos retocadas por galería privada en alta resolución y versión web.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<div class="testimonials">
+  <p class="section-label">Lo que dicen nuestros clientes</p>
+  <h2 class="section-title">Resultados que<br><em>hablan solos</em></h2>
+  <div class="testimonials-grid fade-up">
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"Mi nueva foto de LinkedIn triplicó las visitas a mi perfil en la primera semana. La diferencia es impresionante. BC Studios sabe exactamente cómo mostrar tu mejor versión."</p>
+      <div class="testi-author">María C.</div>
+      <div class="testi-role">Consultora de RRHH · Lima</div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"Hicimos las fotos corporativas de todo nuestro equipo de 15 personas. Proceso súper organizado, el equipo quedó feliz y las fotos superaron nuestras expectativas."</p>
+      <div class="testi-author">Carlos R.</div>
+      <div class="testi-role">Gerente Comercial · Empresa Financiera</div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"La asesoría de imagen fue clave. Nunca había sabido cómo ponerme para una foto, y el resultado fue increíble. Ya lo recomendé a tres colegas."</p>
+      <div class="testi-author">Andrea T.</div>
+      <div class="testi-role">Abogada Independiente · Lima</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <p class="section-label">Reserva tu sesión</p>
+  <h2 class="section-title">Tu imagen profesional<br>empieza <em>hoy</em></h2>
+  <p class="cta-sub">Reserva con el 30% de anticipo y asegura tu fecha. Disponibilidad limitada cada semana.</p>
+  <div class="cta-actions">
+    <a href="https://forms.gle/g7XPAMXS1UWtR9788" target="_blank" class="btn-primary">Reservar ahora</a>
+    <a href="https://bcstudiosperu.myportfolio.com/" target="_blank" class="btn-outline">Ver portafolio</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">BC <span>Studios</span> · Lima, Perú</div>
+  <div class="footer-links">
+    <a href="https://bcstudiosperu.wordpress.com/" target="_blank">Web</a>
+    <a href="https://bcstudiosperu.myportfolio.com/" target="_blank">Portafolio</a>
+    <a href="https://forms.gle/g7XPAMXS1UWtR9788" target="_blank">Reservar</a>
+  </div>
+  <div class="footer-copy">© 2025 BC Studios. Todos los derechos reservados.</div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 120);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
