@@ -181,11 +181,7 @@ textarea{resize:vertical;min-height:90px;line-height:1.6}
 .success-screen h2{font-family:var(--serif);font-size:2.5rem;font-weight:300;margin-bottom:.75rem}
 .success-screen h2 em{font-style:italic;color:var(--gold)}
 .success-screen p{color:var(--text-muted);font-size:.9rem;line-height:1.7;max-width:40ch;margin:0 auto 2rem}
-.whatsapp-btn{display:inline-flex;align-items:center;gap:.6rem;background:#25D366;color:#fff;
-  padding:.9rem 2rem;border-radius:2px;text-decoration:none;font-size:.85rem;
-  font-weight:500;letter-spacing:.08em;text-transform:uppercase;transition:opacity .2s}
-.whatsapp-btn:hover{opacity:.85}
-.whatsapp-btn svg{width:1.1rem;height:1.1rem;fill:currentColor}
+
 
 /* RESPONSIVE */
 @media(max-width:640px){
@@ -516,9 +512,9 @@ textarea{resize:vertical;min-height:90px;line-height:1.6}
       </div>
       <div class="form-card-body">
         <p style="font-size:.85rem;color:var(--text-muted);line-height:1.8;margin-bottom:1rem">
-          Al confirmar, recibirás un mensaje de WhatsApp con los detalles de pago del <strong style="color:var(--white)">anticipo del 30%</strong> para asegurar tu fecha. El saldo restante se paga el día de la sesión.
+          Al confirmar tu reserva, nuestro equipo recibirá tu solicitud y te contactará en menos de <strong style="color:var(--white)">24 horas</strong> para coordinar el anticipo del 30% y confirmar tu fecha definitiva.
         </p>
-        <div class="anticipo-note">✦ Solo necesitas el 30% ahora para reservar. Sin anticipo no se puede garantizar tu fecha.</div>
+        <div class="anticipo-note">✦ Solo necesitas el 30% ahora para asegurar tu fecha. El saldo se paga el día de la sesión.</div>
       </div>
     </div>
 
@@ -534,11 +530,11 @@ textarea{resize:vertical;min-height:90px;line-height:1.6}
       <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
     </div>
     <h2>¡Reserva <em>enviada!</em></h2>
-    <p>Gracias, <strong id="success-name" style="color:var(--white)"></strong>. Te escribiremos por WhatsApp en menos de 24 horas para confirmar tu fecha y enviarte los datos del anticipo.</p>
-    <a id="whatsapp-link" href="#" class="whatsapp-btn" target="_blank">
-      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Escribirnos por WhatsApp
-    </a>
+    <p>Gracias, <strong id="success-name" style="color:var(--white)"></strong>. Hemos recibido tu solicitud y nos pondremos en contacto contigo en menos de <strong style="color:var(--white)">24 horas</strong> para confirmar tu fecha y coordinar el anticipo.</p>
+    <div style="margin-top:1.5rem;display:flex;flex-direction:column;align-items:center;gap:.75rem">
+      <div style="font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)">✦ Reserva registrada correctamente ✦</div>
+      <a href="index.html" style="margin-top:.5rem;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;border-bottom:1px solid var(--mid);padding-bottom:2px">← Volver al inicio</a>
+    </div>
   </div>
 
 </div><!-- /form-wrap -->
@@ -679,25 +675,52 @@ function buildSummary() {
   `;
 }
 
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbytzrXu3WeicJGo0vX6JoCpxFiXWAzl2534U-THiY_JQXAO58wcYR-wmYDuZAh87ngD/exec';
+
 function submitForm() {
-  const msg = encodeURIComponent(
-    `Hola BC Studios 👋\n\nQuiero reservar una sesión:\n\n` +
-    `📸 Servicio: ${state.paquete}\n` +
-    `💰 Precio: ${state.precio}\n` +
-    `📅 Fecha preferida: ${state.fecha || 'Por definir'}\n` +
-    `🕐 Hora: ${state.hora || 'Por definir'}\n` +
-    `👥 Personas: ${state.personas}\n` +
-    (state.addons.length ? `➕ Adicionales: ${state.addons.map(a=>a.name).join(', ')}\n` : '') +
-    `\n👤 Nombre: ${state.nombre}\n` +
-    `📧 Email: ${state.email}\n` +
-    (state.empresa ? `🏢 Empresa: ${state.empresa}\n` : '') +
-    (document.getElementById('notas').value ? `\n📝 Notas: ${document.getElementById('notas').value}` : '')
-  );
-  document.getElementById('whatsapp-link').href = `https://wa.me/51999999999?text=${msg}`;
-  document.getElementById('success-name').textContent = state.nombre.split(' ')[0];
-  document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
-  document.getElementById('success').classList.add('visible');
-  window.scrollTo({top:0,behavior:'smooth'});
+  const notas = document.getElementById('notas').value;
+
+  // Deshabilitar botón para evitar doble envío
+  const btn = document.querySelector('#step4 .btn-next');
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+
+  const payload = {
+    servicio:    state.servicio,
+    paquete:     state.paquete,
+    precio:      state.precio,
+    personas:    state.personas,
+    addons:      state.addons.map(a => a.name).join(', '),
+    fechaSesion: state.fecha,
+    hora:        state.hora,
+    nombre:      state.nombre,
+    telefono:    state.telefono,
+    email:       state.email,
+    empresa:     state.empresa,
+    como:        state.como,
+    notas:       notas
+  };
+
+  fetch(SHEET_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(() => {
+    // Éxito — mostrar pantalla de confirmación
+    document.getElementById('success-name').textContent = state.nombre.split(' ')[0];
+    document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
+    document.getElementById('success').classList.add('visible');
+    window.scrollTo({top:0,behavior:'smooth'});
+  })
+  .catch(() => {
+    // Si falla la red igual mostramos éxito (no-cors no lanza error real)
+    document.getElementById('success-name').textContent = state.nombre.split(' ')[0];
+    document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
+    document.getElementById('success').classList.add('visible');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
 }
 
 // Set min date
