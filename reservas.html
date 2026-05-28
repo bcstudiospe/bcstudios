@@ -701,26 +701,38 @@ function submitForm() {
     notas:       notas
   };
 
-  fetch(SHEET_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  })
-  .then(() => {
-    // Éxito — mostrar pantalla de confirmación
-    document.getElementById('success-name').textContent = state.nombre.split(' ')[0];
-    document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
-    document.getElementById('success').classList.add('visible');
-    window.scrollTo({top:0,behavior:'smooth'});
-  })
-  .catch(() => {
-    // Si falla la red igual mostramos éxito (no-cors no lanza error real)
-    document.getElementById('success-name').textContent = state.nombre.split(' ')[0];
-    document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
-    document.getElementById('success').classList.add('visible');
-    window.scrollTo({top:0,behavior:'smooth'});
+  // Envío por URL params (GET) — funciona siempre desde GitHub Pages
+  const params = new URLSearchParams({
+    servicio:    payload.servicio,
+    paquete:     payload.paquete,
+    precio:      payload.precio,
+    personas:    payload.personas,
+    addons:      payload.addons,
+    fechaSesion: payload.fechaSesion,
+    hora:        payload.hora,
+    nombre:      payload.nombre,
+    telefono:    payload.telefono,
+    email:       payload.email,
+    empresa:     payload.empresa,
+    como:        payload.como,
+    notas:       payload.notas
   });
+
+  const img = new Image();
+  img.src = SHEET_URL + '?' + params.toString();
+  img.onload = img.onerror = () => {
+    document.getElementById('success-name').textContent = state.nombre.split(' ')[0];
+    document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
+    document.getElementById('success').classList.add('visible');
+    window.scrollTo({top:0,behavior:'smooth'});
+  };
+  // Mostrar éxito después de 2s aunque no responda
+  setTimeout(() => {
+    document.getElementById('success-name').textContent = state.nombre.split(' ')[0];
+    document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
+    document.getElementById('success').classList.add('visible');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }, 2000);
 }
 
 // Set min date
